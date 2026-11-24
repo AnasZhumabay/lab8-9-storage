@@ -1,0 +1,24 @@
+# OPTIONAL extension for Task 1.
+# With only 2 DataNodes and replication = 2, losing one node leaves blocks
+# under-replicated with nowhere to copy them to. Adding a third DataNode lets
+# you watch the NameNode actually re-replicate the missing replica.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.datanode3.yml up -d datanode3
+
+services:
+  datanode3:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: hdfs_datanode3
+    hostname: datanode3
+    environment:
+      - SERVICE_PRECONDITION=namenode:9870
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode3:/hadoop/dfs/data
+    depends_on:
+      - namenode
+
+volumes:
+  hadoop_datanode3:

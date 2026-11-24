@@ -1,0 +1,83 @@
+# Lab 8-9: HDFS (1 NameNode + 2 DataNodes) and MinIO (S3-compatible)
+# The top-level `version:` key is omitted on purpose: Docker Compose v2 ignores it
+# and prints an "obsolete" warning.
+#
+# `platform: linux/amd64` is set because the bde2020 Hadoop images are published
+# for amd64 only. On Apple Silicon they run under emulation; on x86 it is a no-op.
+
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: hdfs_namenode
+    hostname: namenode
+    ports:
+      - "9870:9870"   # NameNode Web UI
+      - "9000:9000"   # HDFS RPC (fs.defaultFS)
+    environment:
+      - CLUSTER_NAME=test-cluster
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+
+  datanode1:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: hdfs_datanode1
+    hostname: datanode1
+    environment:
+      - SERVICE_PRECONDITION=namenode:9870
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode1:/hadoop/dfs/data
+    depends_on:
+      - namenode
+
+  datanode2:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: hdfs_datanode2
+    hostname: datanode2
+    environment:
+      - SERVICE_PRECONDITION=namenode:9870
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode2:/hadoop/dfs/data
+    depends_on:
+      - namenode
+
+  minio:
+    image: cgr.dev/chainguard/minio:latest   # minio/minio was removed from Docker Hub / quay.io
+    container_name: local_s3_minio
+    ports:
+      - "9001:9000"   # S3 API      -> http://localhost:9001
+      - "9002:9001"   # Web console -> http://localhost:9002
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadminpassword
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
+  # Task 4 benchmark runner. Not started by `up`; run it on demand with:
+  #   docker compose --profile bench run --rm bench
+  bench:
+    image: python:3.12-slim
+    profiles: ["bench"]
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: >
+      sh -c "pip install -q boto3 requests && python scripts/benchmark.py"
+    depends_on:
+      - namenode
+      - minio
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode1:
+  hadoop_datanode2:
+  minio_data:

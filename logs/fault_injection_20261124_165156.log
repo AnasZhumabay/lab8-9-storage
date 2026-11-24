@@ -1,0 +1,217 @@
+[16:51:56 +   0s] ===== PHASE 0: baseline =====
+[16:52:05 +   9s] live=2 dead=0 under_replicated=0 fsck=HEALTHY
+Connecting to namenode via http://namenode:9870/fsck?ugi=root&files=1&blocks=1&locations=1&path=%2Fuser%2Fstudent%2Fdata%2Fsample_100m.bin
+FSCK started by root (auth:SIMPLE) from /172.19.0.2 for path /user/student/data/sample_100m.bin at Tue Nov 24 11:52:07 UTC 2026
+/user/student/data/sample_100m.bin 104857600 bytes, replicated: replication=2, 1 block(s):  OK
+0. BP-506895808-172.19.0.2-1795520769076:blk_1073741825_1001 len=104857600 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-f916e5ba-bc82-4fb6-93ad-9253e0dbc726,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-3baa3b3f-0014-4d6d-9908-0a55c9776e72,DISK]]
+
+
+Status: HEALTHY
+ Number of data-nodes:	2
+ Number of racks:		1
+ Total dirs:			0
+ Total symlinks:		0
+
+Replicated Blocks:
+ Total size:	104857600 B
+ Total files:	1
+ Total blocks (validated):	1 (avg. block size 104857600 B)
+ Minimally replicated blocks:	1 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	2
+ Average block replication:	2.0
+ Missing blocks:		0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+
+Erasure Coded Block Groups:
+ Total size:	0 B
+ Total files:	0
+ Total block groups (validated):	0
+ Minimally erasure-coded block groups:	0
+ Over-erasure-coded block groups:	0
+ Under-erasure-coded block groups:	0
+ Unsatisfactory placement block groups:	0
+ Average block group size:	0.0
+ Missing block groups:		0
+ Corrupt block groups:		0
+ Missing internal blocks:	0
+FSCK ended at Tue Nov 24 11:52:07 UTC 2026 in 1 milliseconds
+
+
+The filesystem under path '/user/student/data/sample_100m.bin' is HEALTHY
+[16:52:10 +  14s] md5 before fault: 6d2b03f5c1c91c04dd1079c104f9e2c7
+[16:52:10 +  14s] ===== PHASE 1: docker stop hdfs_datanode1 =====
+hdfs_datanode1
+[16:52:13 +  17s] Polling until the NameNode marks the DataNode dead (no heartbeat)...
+[16:52:19 +  23s] live=2 dead=0 under_replicated=0
+[16:52:36 +  40s] live=2 dead=0 under_replicated=0
+[16:52:53 +  57s] live=2 dead=0 under_replicated=0
+[16:53:09 +  73s] live=2 dead=0 under_replicated=0
+[16:53:26 +  90s] live=2 dead=0 under_replicated=0
+[16:53:43 + 107s] live=2 dead=0 under_replicated=0
+[16:53:59 + 123s] live=1 dead=1 under_replicated=0
+[16:53:59 + 123s] Dead-node detection took 106 s after docker stop
+[16:53:59 + 123s] ===== PHASE 2: degraded state =====
+Configured Capacity: 480241451008 (447.26 GB)
+Present Capacity: 442029994054 (411.67 GB)
+DFS Remaining: 441607237632 (411.28 GB)
+DFS Used: 422756422 (403.17 MB)
+DFS Used%: 0.10%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (1):
+
+Name: 172.19.0.5:9866 (hdfs_datanode2.lab8-9-storage_default)
+Hostname: datanode2
+Decommission Status : Normal
+Configured Capacity: 240120725504 (223.63 GB)
+DFS Used: 211378211 (201.59 MB)
+Non DFS Used: 6833696733 (6.36 GB)
+DFS Remaining: 220803592192 (205.64 GB)
+DFS Used%: 0.09%
+DFS Remaining%: 91.96%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 1
+Last contact: Tue Nov 24 11:54:03 UTC 2026
+Last Block Report: Tue Nov 24 11:46:15 UTC 2026
+Num of Blocks: 5
+
+
+Dead datanodes (1):
+
+Name: 172.19.0.4:9866 (172.19.0.4)
+Hostname: datanode1
+Decommission Status : Normal
+Configured Capacity: 240120725504 (223.63 GB)
+DFS Used: 211378211 (201.59 MB)
+Non DFS Used: 6833643485 (6.36 GB)
+DFS Remaining: 220803645440 (205.64 GB)
+DFS Used%: 0.09%
+DFS Remaining%: 91.96%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 1
+Last contact: Tue Nov 24 11:52:12 UTC 2026
+Last Block Report: Tue Nov 24 11:46:15 UTC 2026
+Num of Blocks: 5
+
+
+Connecting to namenode via http://namenode:9870/fsck?ugi=root&files=1&blocks=1&locations=1&path=%2Fuser%2Fstudent%2Fdata%2Fsample_100m.bin
+FSCK started by root (auth:SIMPLE) from /172.19.0.2 for path /user/student/data/sample_100m.bin at Tue Nov 24 11:54:08 UTC 2026
+/user/student/data/sample_100m.bin 104857600 bytes, replicated: replication=2, 1 block(s):  OK
+0. BP-506895808-172.19.0.2-1795520769076:blk_1073741825_1001 len=104857600 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-f916e5ba-bc82-4fb6-93ad-9253e0dbc726,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-3baa3b3f-0014-4d6d-9908-0a55c9776e72,DISK]]
+
+
+Status: HEALTHY
+ Number of data-nodes:	1
+ Number of racks:		1
+ Total dirs:			0
+ Total symlinks:		0
+
+Replicated Blocks:
+ Total size:	104857600 B
+ Total files:	1
+ Total blocks (validated):	1 (avg. block size 104857600 B)
+ Minimally replicated blocks:	1 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	2
+ Average block replication:	2.0
+ Missing blocks:		0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+
+Erasure Coded Block Groups:
+ Total size:	0 B
+ Total files:	0
+ Total block groups (validated):	0
+ Minimally erasure-coded block groups:	0
+ Over-erasure-coded block groups:	0
+ Under-erasure-coded block groups:	0
+ Unsatisfactory placement block groups:	0
+ Average block group size:	0.0
+ Missing block groups:		0
+ Corrupt block groups:		0
+ Missing internal blocks:	0
+FSCK ended at Tue Nov 24 11:54:08 UTC 2026 in 2 milliseconds
+
+
+The filesystem under path '/user/student/data/sample_100m.bin' is HEALTHY
+[16:54:11 + 135s] md5 while degraded: 6d2b03f5c1c91c04dd1079c104f9e2c7
+[16:54:11 + 135s] RESULT: file fully readable from the surviving replica
+[16:54:11 + 135s] NOTE: with 2 DataNodes and replication=2 there is no third node to re-replicate to,
+[16:54:11 + 135s]       so blocks stay under-replicated until the failed node returns.
+[16:54:11 + 135s] >>> Take your Web UI screenshot now (http://localhost:9870 -> Overview / Datanodes).
+[16:56:11 + 255s] ===== PHASE 3: recovery — docker start hdfs_datanode1 =====
+hdfs_datanode1
+[16:56:16 + 260s] live=1 under_replicated=0
+[16:56:31 + 275s] live=2 under_replicated=0
+[16:56:31 + 275s] Recovery to fully replicated took 20 s after docker start
+Connecting to namenode via http://namenode:9870/fsck?ugi=root&files=1&blocks=1&locations=1&path=%2Fuser%2Fstudent%2Fdata%2Fsample_100m.bin
+FSCK started by root (auth:SIMPLE) from /172.19.0.2 for path /user/student/data/sample_100m.bin at Tue Nov 24 11:56:33 UTC 2026
+/user/student/data/sample_100m.bin 104857600 bytes, replicated: replication=2, 1 block(s):  OK
+0. BP-506895808-172.19.0.2-1795520769076:blk_1073741825_1001 len=104857600 Live_repl=2  [DatanodeInfoWithStorage[172.19.0.5:9866,DS-f916e5ba-bc82-4fb6-93ad-9253e0dbc726,DISK], DatanodeInfoWithStorage[172.19.0.4:9866,DS-3baa3b3f-0014-4d6d-9908-0a55c9776e72,DISK]]
+
+
+Status: HEALTHY
+ Number of data-nodes:	2
+ Number of racks:		1
+ Total dirs:			0
+ Total symlinks:		0
+
+Replicated Blocks:
+ Total size:	104857600 B
+ Total files:	1
+ Total blocks (validated):	1 (avg. block size 104857600 B)
+ Minimally replicated blocks:	1 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	2
+ Average block replication:	2.0
+ Missing blocks:		0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+
+Erasure Coded Block Groups:
+ Total size:	0 B
+ Total files:	0
+ Total block groups (validated):	0
+ Minimally erasure-coded block groups:	0
+ Over-erasure-coded block groups:	0
+ Under-erasure-coded block groups:	0
+ Unsatisfactory placement block groups:	0
+ Average block group size:	0.0
+ Missing block groups:		0
+ Corrupt block groups:		0
+ Missing internal blocks:	0
+FSCK ended at Tue Nov 24 11:56:33 UTC 2026 in 4 milliseconds
+
+
+The filesystem under path '/user/student/data/sample_100m.bin' is HEALTHY
+[16:56:36 + 280s] md5 after recovery: 6d2b03f5c1c91c04dd1079c104f9e2c7
+[16:56:36 + 280s] Full log saved to logs/fault_injection_20261124_165156.log

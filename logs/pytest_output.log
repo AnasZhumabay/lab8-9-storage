@@ -1,0 +1,9 @@
+tests/test_storage.py::test_s3_bucket_existence PASSED                   [ 12%]
+tests/test_storage.py::test_s3_object_upload_and_read PASSED             [ 25%]
+tests/test_storage.py::test_custom_metadata_roundtrip_via_head PASSED    [ 37%]
+tests/test_storage.py::test_overwrite_replaces_whole_object PASSED       [ 50%]
+tests/test_storage.py::test_flat_namespace_prefix_listing PASSED         [ 62%]
+tests/test_storage.py::test_delete_then_head_returns_404 PASSED          [ 75%]
+tests/test_storage.py::test_read_after_write_consistency PASSED          [ 87%]
+tests/test_storage.py::test_multipart_upload_integrity PASSED            [100%]
+======================== 8 passed, 2 warnings in 0.52s =========================
